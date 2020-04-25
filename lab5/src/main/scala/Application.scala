@@ -26,15 +26,15 @@ object Application extends App{
       }
 
        @scala.annotation.tailrec
-      def positiveNumbersIteration(acc: List[Int], list: List[Int]): List[Int] = {
+      private def positiveNumbersIteration(accumulator: List[Int], list: List[Int]): List[Int] = {
             if (list.size == 1) {
-                  if (list.head>=0) list:::acc else acc
+                  if (list.head>=0) list:::accumulator else accumulator
             }
             else {
                   if(list.head >= 0){
-                        positiveNumbersIteration(List(list.head):::acc, list.drop(1))
+                        positiveNumbersIteration(List(list.head):::accumulator, list.drop(1))
                   }
-                  else positiveNumbersIteration(acc, list.drop(1))
+                  else positiveNumbersIteration(accumulator, list.drop(1))
             }
       }
 
@@ -49,6 +49,7 @@ object Application extends App{
       def divideEvenAndIncrementNotEven(value: Int): Int = {
             if ((value % 2) == 0) value/2 else value+1
       }
+
       val divideAndIncrementNumbers1 = list2.map(value => divideEvenAndIncrementNotEven(value))
       println(divideAndIncrementNumbers1)
 
@@ -67,15 +68,15 @@ object Application extends App{
       }
 
       @scala.annotation.tailrec
-      def divideEvenAndIncrementNotEvenIteration(acc: List[Int], list: List[Int]): List[Int] = {
+      private def divideEvenAndIncrementNotEvenIteration(accumulator: List[Int], list: List[Int]): List[Int] = {
             if (list.size == 1) {
-                  if ((list.head % 2) == 0) List(list.head / 2):::acc else List(list.head + 1):::acc
+                  if ((list.head % 2) == 0) List(list.head / 2):::accumulator else List(list.head + 1):::accumulator
             }
             else {
                   if((list.head % 2) == 0){
-                        divideEvenAndIncrementNotEvenIteration(List(list.head / 2):::acc, list.drop(1))
+                        divideEvenAndIncrementNotEvenIteration(List(list.head / 2):::accumulator, list.drop(1))
                   }
-                  else divideEvenAndIncrementNotEvenIteration(List(list.head + 1):::acc, list.drop(1))
+                  else divideEvenAndIncrementNotEvenIteration(List(list.head + 1):::accumulator, list.drop(1))
             }
       }
 
